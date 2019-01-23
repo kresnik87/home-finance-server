@@ -1,0 +1,40 @@
+api_platform:
+    title: '%env(APP_NAME)%'
+    description: '%env(APP_DESCRIPTION)%'
+    version: '%env(APP_VERSION)%'
+    path_segment_name_generator: 'api_platform.path_segment_name_generator.dash'
+    enable_fos_user: true
+    allow_plain_identifiers: true
+    default_operation_path_resolver: "http://bma.local"
+    
+    collection:
+        pagination:
+            maximum_items_per_page: 50
+            items_per_page: 10
+            enabled: false
+            page_parameter_name: page
+            items_per_page_parameter_name: itemsPerPage
+            client_items_per_page: true
+            enabled_parameter_name: pagination
+            
+    oauth:
+        enabled: true
+        type: 'oauth2'
+        flow: password
+        tokenUrl: '/api/login'
+        clientId: '%env(CLIENT_ID)%'
+        clientSecret: '%env(CLIENT_SECRET)%'
+        # The oauth authentication url.
+        authorizationUrl: '/oauth/v2/auth'
+        #mock scopes to enable import by angular
+        scopes: 
+            "": ""
+        
+    exception_to_status:
+        Symfony\Component\Serializer\Exception\ExceptionInterface: 400 # Use a raw status code (recommended)
+        ApiPlatform\Core\Exception\InvalidArgumentException: 'HTTP_BAD_REQUEST' # Or a `Symfony\Component\HttpFoundation\Response`'s constant
+        App\Exception\CompetitionNotFoundException: 500 # Here is the handler for our custom exception
+        
+    mapping:
+          paths:
+            - '%kernel.project_dir%/config/packages/apiplatform'

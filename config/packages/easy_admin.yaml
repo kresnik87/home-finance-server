@@ -1,0 +1,33 @@
+easy_admin:
+    site_name: '%env(APP_NAME)%'
+    list: 
+        actions:
+            - { name: 'show', icon: 'search', label: actions.show }
+            - { name: 'edit', icon: 'pencil', label: actions.edit }
+            - { name: 'delete', icon: 'trash', label: actions.delete }
+            - { name: 'new', icon: 'plus-circle', label: actions.new }
+            - { name: 'search', label: actions.search }
+    show:
+        actions:
+            - { name: 'edit', icon: 'pencil', label: actions.edit }
+            - { name: 'delete', icon: 'trash', label: actions.delete }
+    edit:
+        actions:
+#            - { name: 'save', icon: 'save', label: actions.save }
+            - { name: 'delete', icon: 'trash', label: actions.delete }
+            
+    formats:
+        datetime: 'd/m/Y H:i:s'
+    design:
+#        brand_color: '%env(APP_COLOR)%'
+        brand_color: "#09478d"
+#        assets:
+#            js:
+#                - '/ckeditor5/ckeditor.js.map'
+#                - '/ckeditor5/ckeditor.js'
+#                - '/ckeditor5/custom.js'
+        assets:
+            favicon: '/assets/img/logo.png'
+
+imports:
+    - { resource: easyadmin/*.yaml }

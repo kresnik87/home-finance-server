@@ -1,0 +1,17 @@
+{% if view == 'show' %}
+    {% if value|length > 0 %}
+        <ul>
+            {% for element in value %}
+                <li>
+                    <h4>{{ element.title }}</h4>
+                    {% if field_options.path %}
+                        <img src="{{env('BASE_URL')}}{{ field_options.path }}/{{ element.image }}">
+                    {% else %}
+                        {{ element.image }}
+                    {% endif %}
+                    <p>{{ element.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}

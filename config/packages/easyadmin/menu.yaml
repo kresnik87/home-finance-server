@@ -1,0 +1,6 @@
+easy_admin:
+    design:    
+        menu:
+            - { entity: User, icon: 'user' }
+            - { entity: Device, icon: 'mobile' }
+            - { label: 'API', route: 'api', icon: 'tasks'}

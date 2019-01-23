@@ -1,0 +1,80 @@
+#Actions labels
+actions.edit: Editar
+actions.show: Ver
+actions.delete: Eliminar
+actions.new: Añadir
+actions.search: Buscar
+actions.exit: Salir
+
+#Standar fields labels
+id: Id
+name: Nombre
+type: Tipo
+user: Usuario
+video: Vídeo
+audio: Audio
+title: Título
+image: Imagen
+description: Descripción
+link: Enlace 
+username: Usuario
+surnames: Apellidos
+email: Correo
+lastLogin: Último inicio de sesión
+createdDate: Fecha de creación
+updatedDate: Última actualización
+roles: Permisos
+enabled: Activado
+disabled: Desactivado
+profile: Perfil
+telephone: Telefono
+cellphone: Móvil
+address: Dirección
+birthdate: Aniversario 
+nationality: Nacionalidad
+age: Edad
+system: Sistema
+price: Precio
+status: Estado
+amount: Importe
+percent: Porcentage
+absolute: Absoluto
+value: Valor
+active: Activo
+code: Codigo
+devices: Dispositivos
+device: Dispositivo
+postalCode: Código Postal
+state: Provincia
+country: País
+civilStatus: Estado Civil
+phone: Teléfono
+birthDate: Fecha de nacimiento
+city: Ciudad
+model: Modelo
+platform: Plataforma
+manufacturer: Fabricante
+lang: Idioma
+version: Versión
+
+#mime types help
+image.formats: 'Formatos soportados: jpg jpeg png'
+video.formats: 'Formatos soportados: mp4 mov avi'
+audio.formats: 'Formatos soportados: mp4 audio mp3'
+
+wrong.type: Formato incorrecto
+
+#Menu Labels
+menu.user: Usuario
+menu.users: Usuarios
+menu.device: Dispositivo
+menu.devices: Dispositivos
+
+
+# ROLES
+ROLE_USER: Usuario
+ROLE_SUPER_ADMIN: Super Administrador
+ROLE_ADMIN: Administrador
+
+
+password_resset: ¡Contraseña restablecida!

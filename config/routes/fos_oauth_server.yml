@@ -1,0 +1,22 @@
+# FOSAuthServer
+fos_oauth_server_token:
+     path: /api/login
+     controller: fos_oauth_server.controller.token:tokenAction
+
+fos_oauth_server_authorize:
+     path: /api/auth
+     controller: fos_oauth_server.controller.authorize:authorizeAction
+#USER
+logout:
+    path: '/api/logout'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\UserController::logoutAction
+
+api_register:
+    path: '/api/register'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\UserController::registerAction
+        _api_resource_class: App\Entity\User
+        _api_collection_operation_name: 'register'

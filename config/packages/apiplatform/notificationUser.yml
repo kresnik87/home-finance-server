@@ -1,0 +1,19 @@
+resources:
+    App\Entity\NotificationUser:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['notification']
+            denormalization_context:
+                groups: ['notification']
+        collectionOperations:
+            get:
+                method: 'GET'
+                route_name: 'api_notification_get'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

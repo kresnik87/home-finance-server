@@ -1,0 +1,30 @@
+api_device_set:
+    path: '/api/devices'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\NotificationController::setDevice
+        _api_resource_class: App\Entity\Device
+        _api_collection_operation_name: 'create'
+        
+api_device_update:
+    path: '/api/devices/{id}'
+    methods: ['PUT']
+    defaults:
+        _controller: App\Controller\NotificationController::setDevice
+        _api_resource_class: App\Entity\Device
+        _api_collection_operation_name: 'update'
+        
+api_notification_get:
+    path: '/api/notification-users'
+    methods: ['GET']
+    defaults:
+        _controller: App\Controller\NotificationController::notificationsAction
+        _api_resource_class: App\Entity\NotificationUser
+        _api_collection_operation_name: 'gets'
+        
+api_notification_count:
+    path: '/api/notification-count'
+    methods: ['GET']
+    defaults:
+        _controller: App\Controller\NotificationController::CountNotifAction
+        _api_resource_class: App\Entity\NotificationUser

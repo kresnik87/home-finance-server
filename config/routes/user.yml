@@ -1,0 +1,30 @@
+#user
+api_me:
+    path: '/api/me'
+    methods: ['GET','PUT']
+    defaults:
+        _controller: App\Controller\UserController::meAction
+        _api_resource_class: App\Entity\User
+        _api_collection_operation_name: 'me'
+        
+#IMAGE
+api_user_image:
+    path: '/api/me/image'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\UserController::uploadImageAction
+        _api_collection_operation_name: 'image_profile'
+api_users_image:
+    path: '/api/users/image/{id}'
+    methods: ['GET','POST']
+    defaults:
+        _controller: App\Controller\UserController::uploadImageAction
+        _api_collection_operation_name: 'image'
+        
+        
+login:
+    path: '/login'
+profile:
+    path: '/profile'
+admin:
+    path: '/admin'

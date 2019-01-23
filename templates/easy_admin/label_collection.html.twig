@@ -1,0 +1,8 @@
+<ul>
+    {% for label,option in value %}
+        <li>
+            <span>{{(discamelize(label)) |trans}}:</span>
+            <span style="color:{{ (option ? 'green': 'red' )}}">{{ (option ? 'enabled': 'disabled' ) | trans}}</span>
+        </li>
+    {% endfor %}
+</ul>

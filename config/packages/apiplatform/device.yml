@@ -1,0 +1,20 @@
+resources:
+    App\Entity\Device:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['device-read']
+            denormalization_context:
+                groups: ['device-write']
+                swagger_definition_name: null
+        collectionOperations:
+            create:
+                method: 'POST'
+                route_name: 'api_device_set'
+
+        itemOperations:
+            get:
+                method: 'GET'
+            update:
+                method: 'PUT'
+                route_name: 'api_device_update'

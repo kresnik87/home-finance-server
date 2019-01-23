@@ -1,0 +1,10 @@
+easy_admin_bundle:
+    resource: '@EasyAdminBundle/Controller/AdminController.php'
+    prefix: /admin
+    type: annotation
+#homepage:
+#    path: /
+#    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+#    defaults:
+#        path: /admin
+#        permanent: true

@@ -1,0 +1,117 @@
+{% block header %}
+    <style>
+        body
+        {
+            margin: 0px;
+            background: {{env("APP_COLOR")}};
+        }
+        .card
+        {
+            padding: 3rem;
+            height: fit-content;
+            margin: auto;
+            background: white;
+            width:24em;
+            border-radius:1rem;
+            margin-top: 150px;
+        }
+        .fos_user_resetting_reset, .fos_user_user_show
+        {
+            color: black;
+        }
+        .fos_user_user_show p
+        {
+{#            display: none;#}
+        }
+        {#   .fos_user_user_show
+           {
+               content: 'La contraseña se ha cambiado con éxito, ya puedes iniciar sesión';
+               font-size: 1.1rem;
+           }#}
+        #fos_user_resetting_form
+        {
+            margin-bottom: 1rem;
+        }
+        label[for=remember_me]
+        {
+            font-size: 1.1em;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        label.required, label[for=username], label[for=password]
+        {
+            font-size: 1.1em;
+            text-align: left;
+            display: block;
+            margin-top: .5rem;
+
+        }
+        #fos_user_resetting_form_plainPassword_second, #fos_user_resetting_form_plainPassword_first, #username, #password
+        {
+            padding: 0px;
+            margin: 0 auto;
+            font-size: .8em;
+            line-height: 2em;
+            font-family: 'Averta-Regular';
+            border: 1px solid #CFD4E5;
+            margin-top: .2rem;
+            margin-bottom: .6rem;
+            width: calc(100%);
+        }
+        input[type=text]
+        {
+            width: auto;
+        }
+        .btn
+        {
+            align-items: flex-start;
+            text-align: center;
+            cursor: default;
+            color: buttontext;
+            background-color: buttonface;
+            box-sizing: border-box;
+            padding: 2px 6px 3px;
+            border-width: 2px;
+            border-style: outset;
+            border-color: buttonface;
+            border-image: initial;
+        }
+        input[type=submit], .btn
+        {
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            display: inherit;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            margin: 0 auto;
+        }
+        .errors
+        {
+            height: 1.8rem;
+            font-size: 1rem;
+            padding: .6rem;
+            color:red;
+            font-weight: bold;
+        }
+        .version
+        {
+            font-style: italic;
+            font-size: .8rem;
+            width: 100%;
+            text-align: right;
+            margin-bottom: -2rem; 
+        }
+    </style>
+    <div style="width: 100%; background-color: white; text-align: center;">
+        <img src="../assets/img/logo.png" alt="{{env("APP_NAME")}}" title="{{env("APP_NAME")}}" style="width: 24em; height: auto;"/>
+    </div>
+{% endblock header %}
+
+{% block fos_user_content %}
+    {% include "@FOSUser/ChangePassword/change_password_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{% block body %}
+
+{% endblock body %}

@@ -1,0 +1,29 @@
+easy_admin:
+    entities:    
+        Device:
+            disabled_actions: ['delete', 'edit', 'new']
+            class: App\Entity\Device
+            label: menu.devices
+            list:
+                title: menu.devices
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'user', label: 'user' }
+                    - { property: 'platform', label: 'platform'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createdDate', label: 'createdDate'}
+                    
+            show:
+                title: menu.device
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'uuid', label: 'Uuid' }
+                    - { property: 'model', label: 'model'}
+                    - { property: 'platform', label: 'platform'}
+                    - { property: 'manufacturer', label: 'manufacturer'}
+                    - { property: 'lang', label: 'lang'}      
+                    - { property: 'version', label: 'version'}                    
+                    - { property: 'user', label: 'user'} 
+                    - { property: 'lastLogin', label: 'lastLogin'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createdDate', label: 'createdDate'}

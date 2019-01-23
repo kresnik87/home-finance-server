@@ -1,0 +1,65 @@
+easy_admin:
+    entities:    
+        User:
+            disabled_actions: ['delete']
+            class: App\Entity\User
+            label: menu.users
+            list:
+                title: menu.users
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'dni', label: 'dni' }
+                    - { property: 'username', label: 'username' }
+                    - { property: 'email', label: 'email'}
+                    - { property: 'enabled', label: 'enabled',type: 'toggle'}                    
+#                    - { property: 'roles', label: 'roles', template: 'translate_collection.html.twig'}
+                    - { property: 'lastLogin', label: 'lastLogin'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createdDate', label: 'createdDate'}
+                    
+            show:
+                title: menu.user
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'dni', label: 'dni' }
+                    - { property: 'username', label: 'username' }
+                    - { property: 'image', label: 'image', type: 'image', base_path: '%env(APP_IMAGE_USER)%' }
+                    - { property: 'name', label: 'name'}
+                    - { property: 'surnames', label: 'surnames'}
+                    - { property: 'email', label: 'email'}
+                    - { property: 'enabled', label: 'enabled'}      
+                    - { property: 'birthDate', label: 'birthDate'}                    
+                    - { property: 'phone', label: 'phone'} 
+                    - { property: 'birthDate', label: 'birthDate'}                    
+                    - { property: 'civilStatus', label: 'civilStatus'}                    
+
+#                    - { type: 'section', label: 'address' }   
+                    - { property: 'country', label: 'country'}                    
+                    - { property: 'state', label: 'state'}                    
+                    - { property: 'postalCode', label: 'postalCode'}                    
+                    - { property: 'city', label: 'city'}                    
+
+                    - { property: 'devices', label: 'devices'}                    
+
+#                    - { property: 'roles', label: 'roles', template: 'translate_collection.html.twig'}
+                    - { property: 'lastLogin', label: 'lastLogin'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createdDate', label: 'createdDate'}
+                    
+                    
+            edit:
+                title: menu.user
+                fields:
+                    - { property: 'dni', label: 'dni' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'surnames', label: 'surnames'}
+                    - { property: 'email', label: 'email'}
+                    - { property: 'enabled', label: 'enabled'} 
+                    - { property: 'phone', label: 'phone'}                    
+                    - { type: 'section', label: 'address' }   
+                    - { property: 'country', label: 'country'}                    
+                    - { property: 'state', label: 'state'}                    
+                    - { property: 'postalCode', label: 'postalCode'}                    
+                    - { property: 'city', label: 'city'}   
+#                    - { property: 'roles', label: 'roles', template: 'translate_collection.html.twig'}
+                    - { property: 'imageFile', label: 'image', type: 'vich_image', help: 'image.formats'}

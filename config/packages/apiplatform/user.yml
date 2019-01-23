@@ -1,0 +1,124 @@
+resources:
+    App\Entity\User:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['user-read']
+            denormalization_context:
+                groups: ['user-write']
+            enable_max_depth: true
+        collectionOperations:
+            register:
+                method: 'POST'
+                route_name: 'api_register'
+            get:
+                method: 'GET'
+#                access_control: is_granted('ROLE_SUPERADMIN')
+                
+            post:
+                method: 'POST'
+                access_control: is_granted('ROLE_SUPERADMIN')
+
+            image:
+                method: 'POST'
+                route_name: 'api_user_image'
+                access_control: is_granted('ROLE_USER')
+            
+        itemOperations:
+            me:
+                method: 'GET'
+                route_name: 'api_me'
+                swagger_context:
+                    summary: 'Returns current user data'
+                    parameters:
+                        {}
+                access_control: is_granted('ROLE_USER')
+                
+            logout:
+                method: 'POST'
+                route_name: 'logout'
+                defaults:
+                    color: 'brown'
+                swagger_context:
+                    summary: 'Remove device and session'
+                access_control: is_granted('ROLE_USER')
+
+            get:
+                method: 'GET'
+                swagger_context:
+                    summary: 'retrives specific user data'
+                access_control: is_granted('ROLE_SUPERADMIN')
+
+            put:
+                method: 'PUT'
+                swagger_context:
+                  summary: 'Update specific user data'
+                access_control: is_granted('ROLE_SUPERADMIN')
+
+            meput:
+                method: 'PUT'
+                route_name: 'api_me'
+                swagger_context:
+                    summary: 'Update current user data'
+                    parameters:
+                        -
+                            name: username
+                            in: path
+                            type: string
+                        -
+                            name: name
+                            in: path
+                            type: string
+                        - 
+                            name: surnames
+                            in: path
+                            type: string
+                        -
+                            name: email
+                            in: path
+                            type: string
+                        -
+                            name: phone
+                            in: path
+                            type: string
+                        -
+                            name: address
+                            in: path
+                            type: string
+                        -
+                            name: plainPassword
+                            in: path
+                            type: string
+                        -
+                            name: dni
+                            in: path
+                            type: string
+                access_control: is_granted('ROLE_USER')
+
+
+            login:
+                method: 'POST'
+                route_name: "fos_oauth_server_token"
+                swagger_context:
+                    summary: 'Login (Must be a form-data)'
+                    parameters:
+                          -
+                            name: username
+                            in: path
+                            type: string
+                          -
+                            name: password
+                            in: path
+                            type: string
+                          -
+                            name: client_id
+                            in: path
+                            type: string
+                          -
+                            name: client_secret
+                            in: path
+                            type: string
+                          -
+                            name: grant_type
+                            in: path
+                            type: string
