@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\EntityListeners({"App\EventListener\UserListener"})
  * @Vich\Uploadable
  */
 class User extends BaseUser

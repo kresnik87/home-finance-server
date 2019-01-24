@@ -43,10 +43,12 @@ services:
             - '@doctrine.orm.entity_manager'
         tags: [ name:'serializer.normalizer', priority:70 ]
 
-#    
-#    App\Swagger\SwaggerDecorator:
-#        decorates: 'api_platform.swagger.normalizer.documentation'
-#        arguments: 
-#            $decorated: '@App\Swagger\SwaggerDecorator.inner'
-#        autoconfigure: false
-        
+    user_listener:
+        class: \App\EventListener\UserListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            -
+                name: doctrine.orm.entity_listener
+                event: postPersist
+                entity: App\Entity\User
+                entity_manager: custom

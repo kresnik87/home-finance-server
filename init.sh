@@ -1,4 +1,4 @@
-#!/bin/bash
+ç#!/bin/bash
 clear;
 echo "Creating "$1" Symfony project with base Configuration";
 mkdir ../$1-backend -v;
@@ -28,6 +28,8 @@ read -p "Enter the base url for this proyect [http://${1}.local]" base_url;
 sed -i.bak 's\'BASE_URL=^'\'BASE_URL=${base_url:-http://${1}.local}'\' .env.local;
 read -p "Enter the mailer url [no-reply@${1}.com]" mailer_url;
 sed -i.bak 's\'MAILER_URL=^'\'MAILER_URL=${mailer_url:-no-reply@${1}.com}'\' .env.local;
+read -p "Enter the Proyect name [${1}]" app_name;
+sed -i.bak 's\'APP_NAME=^'\'APP_NAME=${app_name:-${1}}'\' .env.local;
 
 php bin/console fos:user:create  --super-admin admin admin@$1.local admin-$1
 
@@ -35,6 +37,6 @@ php bin/console assets:install --symlink
 rm .env.local.bak;
 rm init.sh;
 rm db.sh;
-php bin/console cachel:clear;
+php bin/console cache:clear;
 echo "Now you can edit the file .env.local to edit variables";
 echo "The backend user is admin with as admin-${1} password";
