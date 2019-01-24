@@ -10,8 +10,12 @@ git checkout -b develop
 git add *
 git commit -am $1" first checkin"
 git push origin develop
-cp -v .env.dist .env;
+cp -v .env .env.local;
 composer install;
-php bin/console doctrine:schema:update -f;
+bash ./db.sh $1;
+sed -i.bak 's\'DATABASE_URL=^'\'DATABASE_URL=mysql://${1}:db-${1}@127.0.0.1:3306/${1}'\' .env.local
+APP_ENV=local php bin/console doctrine:schema:update -f;
 php bin/console fos:oauth-server:create-client --grant-type="password"
+#extract client and secrect to set on env
+
 php bin/console fos:user:create  --super-admin admin admin@$1.local admin-$1
