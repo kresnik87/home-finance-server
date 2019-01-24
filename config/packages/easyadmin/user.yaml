@@ -12,7 +12,7 @@ easy_admin:
                     - { property: 'username', label: 'username' }
                     - { property: 'email', label: 'email'}
                     - { property: 'enabled', label: 'enabled',type: 'toggle'}                    
-#                    - { property: 'roles', label: 'roles', template: 'translate_collection.html.twig'}
+                    - { property: 'roles', label: 'roles', template: 'easy_admin/translate_collection.html.twig'}
                     - { property: 'lastLogin', label: 'lastLogin'}
                     - { property: 'updatedDate', label: 'updatedDate'}
                     - { property: 'createdDate', label: 'createdDate'}
@@ -41,7 +41,7 @@ easy_admin:
 
                     - { property: 'devices', label: 'devices'}                    
 
-#                    - { property: 'roles', label: 'roles', template: 'translate_collection.html.twig'}
+                    - { property: 'roles', label: 'roles', template: 'easy_admin/translate_collection.html.twig'}
                     - { property: 'lastLogin', label: 'lastLogin'}
                     - { property: 'updatedDate', label: 'updatedDate'}
                     - { property: 'createdDate', label: 'createdDate'}
@@ -61,5 +61,5 @@ easy_admin:
                     - { property: 'state', label: 'state'}                    
                     - { property: 'postalCode', label: 'postalCode'}                    
                     - { property: 'city', label: 'city'}   
-#                    - { property: 'roles', label: 'roles', template: 'translate_collection.html.twig'}
+                    - { property: 'roles', label: 'roles', template: 'easy_admin/translate_collection.html.twig'}
                     - { property: 'imageFile', label: 'image', type: 'vich_image', help: 'image.formats'}
