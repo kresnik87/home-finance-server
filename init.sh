@@ -19,3 +19,5 @@ php bin/console fos:oauth-server:create-client --grant-type="password"
 #extract client and secrect to set on env
 
 php bin/console fos:user:create  --super-admin admin admin@$1.local admin-$1
+
+php bin/console assets:install --symlink
