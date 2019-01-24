@@ -6,10 +6,7 @@ git clone $2 ../$1-backend
 cp -Rfv ./* ../$1-backend/
 cp -f ./.* ../$1-backend/
 cd ../$1-backend
-git checkout -b develop
-git add *
-git commit -am $1" first checkin"
-git push origin develop
+git config core.fileMode false
 cp -v .env .env.local;
 composer install;
 bash ./db.sh $1;
@@ -40,3 +37,10 @@ rm db.sh;
 php bin/console cache:clear;
 echo "Now you can edit the file .env.local to edit variables";
 echo "The backend user is admin with as admin-${1} password";
+git checkout -b develop
+git add *
+git add .env
+git add .gitignore
+git commit -am $1" first checkin"
+git push -u origin develop
+
