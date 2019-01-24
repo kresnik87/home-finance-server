@@ -43,4 +43,4 @@ git add .env
 git add .gitignore
 git commit -am $1" first checkin"
 git push -u origin develop
-
+chmod 777 var/* -R;
