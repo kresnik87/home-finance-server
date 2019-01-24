@@ -1,4 +1,4 @@
-ç#!/bin/bash
+#!/bin/bash
 clear;
 echo "Creating "$1" Symfony project with base Configuration";
 mkdir ../$1-backend -v;
