@@ -13,11 +13,11 @@ resources:
                 route_name: 'api_register'
             get:
                 method: 'GET'
-#                access_control: is_granted('ROLE_SUPERADMIN')
+#                access_control: is_granted('ROLE_SUPER_ADMIN')
                 
             post:
                 method: 'POST'
-                access_control: is_granted('ROLE_SUPERADMIN')
+                access_control: is_granted('ROLE_SUPER_ADMIN')
 
             image:
                 method: 'POST'
@@ -47,13 +47,13 @@ resources:
                 method: 'GET'
                 swagger_context:
                     summary: 'retrives specific user data'
-                access_control: is_granted('ROLE_SUPERADMIN')
+                access_control: is_granted('ROLE_SUPER_ADMIN')
 
             put:
                 method: 'PUT'
                 swagger_context:
                   summary: 'Update specific user data'
-                access_control: is_granted('ROLE_SUPERADMIN')
+                access_control: is_granted('ROLE_SUPER_ADMIN')
 
             meput:
                 method: 'PUT'
