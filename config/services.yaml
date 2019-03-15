@@ -39,9 +39,7 @@ services:
     App\Serializer\FilesNormalizer:
         arguments:
             - '@api_platform.serializer.normalizer.item'
-            - '@security.token_storage'
-            - '@doctrine.orm.entity_manager'
-        tags: [ name:'serializer.normalizer', priority:70 ]
+        decorates:  'api_platform.jsonld.normalizer.item'
 
     user_listener:
         class: \App\EventListener\UserListener
