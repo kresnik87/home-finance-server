@@ -20,7 +20,7 @@ Next requiere a valid user and password for your local database
 And ask for a optional enviorments values
 ```console
   cd base
-  bash ./init.php {proyect alias} {github link}
+  bash ./init.sh {proyect alias} {github link}
 ```
 
 Know Issues
