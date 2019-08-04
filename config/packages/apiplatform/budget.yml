@@ -1,0 +1,22 @@
+resources:
+    App\Entity\Budget:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['budget-read']
+            denormalization_context:
+                groups: ['budget-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

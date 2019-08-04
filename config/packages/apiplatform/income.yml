@@ -1,0 +1,22 @@
+resources:
+    App\Entity\Income:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['income-read']
+            denormalization_context:
+                groups: ['income-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

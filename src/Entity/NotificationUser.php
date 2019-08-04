@@ -12,6 +12,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class NotificationUser
 {
+
+    const NOTIFICATION_TYPE_ANSWER  = 'answer';
+    const NOTIFICATION_TYPE_READ      = 'read';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,7 +46,12 @@ class NotificationUser
      * @Groups({"user-read", "notification"})
      */
     private $deleted = false;
-    
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"user-read", "notification"})
+     */
+    private $acepted = false;
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -51,6 +60,12 @@ class NotificationUser
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user-read", "user-write"})
+     */
+    private $type= self::NOTIFICATION_TYPE_READ;
 
     
     public function __construct()
@@ -110,6 +125,17 @@ class NotificationUser
 
         return $this;
     }
+    public function getAcepted(): ?bool
+    {
+        return $this->acepted;
+    }
+
+    public function setAcepted(?bool $acepted): self
+    {
+        $this->acepted = $acepted;
+
+        return $this;
+    }
     
     public function getCreatedDate(): ?\dateTime
     {
@@ -129,4 +155,16 @@ class NotificationUser
         $this->updatedDate = $updatedDate? $updatedDate: new \dateTime();
         return $this;
     }
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type= $type;
+
+        return $this;
+    }
+
 }

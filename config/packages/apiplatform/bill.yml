@@ -1,0 +1,22 @@
+resources:
+    App\Entity\Bill:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['bill-read']
+            denormalization_context:
+                groups: ['bill-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

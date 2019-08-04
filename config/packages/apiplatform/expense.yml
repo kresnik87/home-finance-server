@@ -1,0 +1,22 @@
+resources:
+    App\Entity\Expenses:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['expenses-read']
+            denormalization_context:
+                groups: ['expenses-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

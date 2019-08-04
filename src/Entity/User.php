@@ -31,7 +31,7 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"user-read","device-write"})
+     * @Groups({"user-read","device-write", "home-write"})
      */
     protected $id;
     
@@ -148,6 +148,11 @@ class User extends BaseUser
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Home", inversedBy="members")
+     */
+    private $home;
     
     public function __construct()
     {
@@ -156,6 +161,7 @@ class User extends BaseUser
         $this->notifications = new ArrayCollection();
         $this->createdDate = new \dateTime();
         $this->updatedDate = new \dateTime();
+        $this->setEnabled(true);
     }
     public function __toString()
     {
@@ -534,6 +540,18 @@ class User extends BaseUser
     public function setUpdatedDate(?\dateTime $updatedDate = null): self
     {
         $this->updatedDate = $updatedDate? $updatedDate: new \dateTime();
+        return $this;
+    }
+
+    public function getHome(): ?Home
+    {
+        return $this->home;
+    }
+
+    public function setHome(?Home $home): self
+    {
+        $this->home = $home;
+
         return $this;
     }
 

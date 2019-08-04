@@ -1,0 +1,25 @@
+resources:
+    App\Entity\Home:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['home-read']
+            denormalization_context:
+                groups: ['home-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'
+
+            delete:
+                method: 'DELETE'

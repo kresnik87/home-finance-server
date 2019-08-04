@@ -1,0 +1,38 @@
+easy_admin:
+    entities:    
+        Home:
+            class: App\Entity\Home
+            label: menu.home
+            list:
+                title: menu.home
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'address', label: 'address'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createDate', label: 'createdDate'}
+                    
+            show:
+                title: menu.home
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'address', label: 'address'}
+                    - { property: 'members', label: 'members' }
+                    - { property: 'bills', label: 'bills'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createDate', label: 'createdDate'}
+
+#
+                    
+                    
+            edit:
+                title: menu.home
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'address', label: 'address'}
+                    - { property: 'members', label: 'members' }
+                    - { property: 'bills', label: 'bills'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createDate', label: 'createdDate'}

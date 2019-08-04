@@ -50,3 +50,12 @@ services:
                 event: postPersist
                 entity: App\Entity\User
                 entity_manager: custom
+
+    home_listener:
+        class: \App\EventListener\HomeListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - name: doctrine.orm.entity_listener
+              event: prePersist
+              entity: App\Entity\Home
+              entity_manager: custom

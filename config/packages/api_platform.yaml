@@ -5,7 +5,7 @@ api_platform:
     path_segment_name_generator: 'api_platform.path_segment_name_generator.dash'
     enable_fos_user: true
     allow_plain_identifiers: true
-    default_operation_path_resolver: "http://bma.local"
+    default_operation_path_resolver: "http://api.finance.local"
     
     collection:
         pagination:

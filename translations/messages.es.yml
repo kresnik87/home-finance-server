@@ -56,6 +56,8 @@ platform: Plataforma
 manufacturer: Fabricante
 lang: Idioma
 version: Versión
+bills: Facturas
+members: Miembros
 
 #mime types help
 image.formats: 'Formatos soportados: jpg jpeg png'
@@ -69,6 +71,7 @@ menu.user: Usuario
 menu.users: Usuarios
 menu.device: Dispositivo
 menu.devices: Dispositivos
+menu.home: Hogar
 
 
 # ROLES

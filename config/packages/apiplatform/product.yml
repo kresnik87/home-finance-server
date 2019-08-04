@@ -1,0 +1,22 @@
+resources:
+    App\Entity\Product:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['product-read']
+            denormalization_context:
+                groups: ['product-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

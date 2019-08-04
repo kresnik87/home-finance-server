@@ -1,0 +1,22 @@
+resources:
+    App\Entity\BudgetCat:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['budgetCat-read']
+            denormalization_context:
+                groups: ['budgetCat-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

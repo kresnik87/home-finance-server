@@ -3,4 +3,5 @@ easy_admin:
         menu:
             - { entity: User, icon: 'user' }
             - { entity: Device, icon: 'mobile' }
+            - { entity: Home, icon: 'home' }
             - { label: 'API', route: 'api', icon: 'tasks'}

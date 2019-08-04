@@ -1,0 +1,22 @@
+resources:
+    App\Entity\ShoppingList:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['shopping-read']
+            denormalization_context:
+                groups: ['shopping-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'

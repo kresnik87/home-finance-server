@@ -1,0 +1,22 @@
+resources:
+    App\Entity\FinanceStatus:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['finance-read']
+            denormalization_context:
+                groups: ['finance-write']
+            swagger_context: 
+                groups: []
+        collectionOperations:
+            get:
+                method: 'GET'
+            post:
+                method: 'POST'
+
+        itemOperations:
+            get:
+                method: 'GET'
+
+            put:
+                method: 'PUT'
