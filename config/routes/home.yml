@@ -1,0 +1,6 @@
+home_add_members:
+    path: '/api/home/add_members'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\HomeController::sendRequestHomeMembersAction
+        _api_collection_operation_name: 'addMembers'

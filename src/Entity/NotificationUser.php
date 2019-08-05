@@ -32,12 +32,14 @@ class NotificationUser
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notifications")
+     * @Groups({"notification","home-read"})
      */
     private $user;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Groups({"user-read", "notification"})
+     * @Groups({"user-read", "notification","home-read"})
      */
     private $readed = false;
 
@@ -49,11 +51,12 @@ class NotificationUser
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"user-read", "notification"})
+     * @Groups({"user-read", "notification","home-read"})
      */
     private $acepted = false;
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"user-read", "notification","home-read"})
      */
     private $createdDate;
     /**
@@ -63,9 +66,15 @@ class NotificationUser
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"user-read", "user-write","home-read"})
      */
     private $type= self::NOTIFICATION_TYPE_READ;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Home", inversedBy="requestNotif")
+     * @Groups({"home-read"})
+     */
+    private $home;
 
     
     public function __construct()
@@ -163,6 +172,18 @@ class NotificationUser
     public function setType(string $type): self
     {
         $this->type= $type;
+
+        return $this;
+    }
+
+    public function getHome(): ?Home
+    {
+        return $this->home;
+    }
+
+    public function setHome(?Home $home): self
+    {
+        $this->home = $home;
 
         return $this;
     }

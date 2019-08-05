@@ -84,12 +84,19 @@ class Home
      */
     private $owner;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\NotificationUser", mappedBy="home")
+     * @Groups({"home-read","home-write"})
+     */
+    private $requestNotif;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
         $this->bills = new ArrayCollection();
         $this->createDate = new \dateTime();
         $this->updatedDate = new \dateTime();
+        $this->requestNotif = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,6 +104,10 @@ class Home
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->getName() . " " . " (". $this->getId() . ")";
+    }
     /**
      * @return Collection|User[]
      */
@@ -249,6 +260,37 @@ class Home
     public function setOwner(User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|NotificationUser[]
+     */
+    public function getRequestNotif(): Collection
+    {
+        return $this->requestNotif;
+    }
+
+    public function addRequestNotif(NotificationUser $requestNotif): self
+    {
+        if (!$this->requestNotif->contains($requestNotif)) {
+            $this->requestNotif[] = $requestNotif;
+            $requestNotif->setHome($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequestNotif(NotificationUser $requestNotif): self
+    {
+        if ($this->requestNotif->contains($requestNotif)) {
+            $this->requestNotif->removeElement($requestNotif);
+            // set the owning side to null (unless already changed)
+            if ($requestNotif->getHome() === $this) {
+                $requestNotif->setHome(null);
+            }
+        }
 
         return $this;
     }

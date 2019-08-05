@@ -11,6 +11,7 @@ easy_admin:
                     - { property: 'address', label: 'address'}
                     - { property: 'updatedDate', label: 'updatedDate'}
                     - { property: 'createDate', label: 'createdDate'}
+                    - { property: 'owner', label: 'owner'}
                     
             show:
                 title: menu.home
@@ -22,7 +23,7 @@ easy_admin:
                     - { property: 'bills', label: 'bills'}
                     - { property: 'updatedDate', label: 'updatedDate'}
                     - { property: 'createDate', label: 'createdDate'}
-
+                    - { property: 'owner', label: 'owner'}
 #
                     
                     

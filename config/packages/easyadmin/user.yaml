@@ -63,3 +63,4 @@ easy_admin:
                     - { property: 'city', label: 'city'}   
                     - { property: 'roles', label: 'roles', template: 'easy_admin/translate_collection.html.twig'}
                     - { property: 'imageFile', label: 'image', type: 'vich_image', help: 'image.formats'}
+                    - { property: 'home', label: 'home'}

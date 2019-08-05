@@ -58,6 +58,7 @@ lang: Idioma
 version: Versión
 bills: Facturas
 members: Miembros
+owner: Propietario
 
 #mime types help
 image.formats: 'Formatos soportados: jpg jpeg png'

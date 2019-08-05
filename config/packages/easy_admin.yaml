@@ -20,7 +20,7 @@ easy_admin:
         datetime: 'd/m/Y H:i:s'
     design:
 #        brand_color: '%env(APP_COLOR)%'
-        brand_color: "#09478d"
+        brand_color: "#2a555d"
 #        assets:
 #            js:
 #                - '/ckeditor5/ckeditor.js.map'

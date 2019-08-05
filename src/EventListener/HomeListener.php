@@ -21,10 +21,7 @@ class HomeListener
 
     }
 
-    /**
-     * @ORM\PostPersist
-     */
-    /**
+        /**
      * @ORM\PrePersist
      */
     public function prePersistHandler(Home $home, LifecycleEventArgs $event)
@@ -37,6 +34,8 @@ class HomeListener
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user instanceof User) {
            $home->setOwner($user);
+           $user->setHome($home);
+           $em->persist($user);
         }
     }
 
