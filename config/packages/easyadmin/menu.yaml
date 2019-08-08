@@ -4,4 +4,6 @@ easy_admin:
             - { entity: User, icon: 'user' }
             - { entity: Device, icon: 'mobile' }
             - { entity: Home, icon: 'home' }
+            - { entity: NotificationUser, icon: 'envelope' }
+            - { entity: Notification, icon: 'envelope' }
             - { label: 'API', route: 'api', icon: 'tasks'}

@@ -59,3 +59,17 @@ services:
               event: prePersist
               entity: App\Entity\Home
               entity_manager: custom
+
+    sendmail_command_handler:
+        class: App\Handlers\CommandHandlers\SendMailHandler
+        tags:
+            - { name: command_handler, handles: App\Handlers\Command\SendMailCommand }
+        public: true
+
+    sendpush_command_handler:
+        class: App\Handlers\CommandHandlers\SendPushHandler
+        arguments:
+                - "@doctrine.orm.entity_manager"
+        tags:
+             - { name: command_handler, handles: App\Handlers\Command\SendPushCommand }
+        public: true

@@ -151,8 +151,15 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Home", inversedBy="members")
+     * @Groups({"user-read"})
      */
     private $home;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\FinanceStatus", inversedBy="user", cascade={"persist", "remove"})
+     * @Groups({"user-read"})
+     */
+    private $financeStatus;
     
     public function __construct()
     {
@@ -551,6 +558,18 @@ class User extends BaseUser
     public function setHome(?Home $home): self
     {
         $this->home = $home;
+
+        return $this;
+    }
+
+    public function getFinanceStatus(): ?FinanceStatus
+    {
+        return $this->financeStatus;
+    }
+
+    public function setFinanceStatus(?FinanceStatus $financeStatus): self
+    {
+        $this->financeStatus = $financeStatus;
 
         return $this;
     }

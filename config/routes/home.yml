@@ -3,4 +3,5 @@ home_add_members:
     methods: ['POST']
     defaults:
         _controller: App\Controller\HomeController::sendRequestHomeMembersAction
+        _api_resource_class: App\Entity\Home
         _api_collection_operation_name: 'addMembers'

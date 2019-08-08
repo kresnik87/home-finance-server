@@ -1,0 +1,27 @@
+easy_admin:
+    entities:    
+        NotificationUser:
+            class: App\Entity\NotificationUser
+            label: menu.notificationUser
+            list:
+                title: menu.notificationUser
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'notification', label: 'notification' }
+                    - { property: 'user', label: 'user'}
+                    - { property: 'readed', label: 'readed'}
+                    - { property: 'deleted', label: 'deleted'}
+                    - { property: 'createdDate', label: 'createDate'}
+                    
+            show:
+                title: menu.notificationUser
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'notification', label: 'notification' }
+                    - { property: 'user', label: 'user'}
+                    - { property: 'readed', label: 'readed' }
+                    - { property: 'deleted', label: 'deleted'}
+                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'createdDate', label: 'createdDate'}
+                    - { property: 'acepted', label: 'acepted'}
+                    - { property: 'type', label: 'type'}

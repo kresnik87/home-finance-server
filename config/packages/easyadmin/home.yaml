@@ -24,6 +24,7 @@ easy_admin:
                     - { property: 'updatedDate', label: 'updatedDate'}
                     - { property: 'createDate', label: 'createdDate'}
                     - { property: 'owner', label: 'owner'}
+                    - { property: 'requestNotif', label: 'notification'}
 #
                     
                     

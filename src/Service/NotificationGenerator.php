@@ -11,24 +11,32 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use RedjanYm\FCMBundle\FCMClient;
 use sngrl\PhpFirebaseCloudMessaging\Client;
+use App\Handlers\Command\SendMailCommand;
+use SimpleBus\SymfonyBridge\Bus\CommandBus;
 
 class NotificationGenerator
 {
 
     const NOTIFICATION_WELCOME = "default.welcome";
+    const NOTIFICATION_SEND_REQUEST="home.request";
+    const MAIL_USER_REGISTER= "mail_register";
 
     private $em;
     private $translator;
+   // private $commandBus;
+    private $templating;
     private $params;
 
     /**
      * @param EntityManagerInterface the Doctrine entity Manager
      */
-    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator, ParameterBagInterface $params)
+    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator, ParameterBagInterface $params,\Twig_Environment $templating)
     {
         $this->em = $entityManager;
         $this->translator = $translator;
         $this->params = $params;
+      //  $this->commandBus = $commandBus;
+        $this->templating = $templating;
     }
 
     private function getWelcomeNotification()
@@ -50,25 +58,45 @@ class NotificationGenerator
 
         return $notif;
     }
+    private function getRequestNotification()
+    {
+        //check if exist
+        $notif = $this->em->getRepository(Notification::class)->findOneByName(self::NOTIFICATION_SEND_REQUEST);
+        if (!$notif)
+        {
+            //create
+            $notif = new Notification;
+            $notif->setName(self::NOTIFICATION_SEND_REQUEST);
+            $notif->setTitle("notification.request.title");
+            $notif->setDescription("notification.request.description");
+            $this->em->persist($notif);
+            $this->em->flush();
+        }
+
+
+        return $notif;
+    }
 
     public function getWelcomeName()
     {
         return self::NOTIFICATION_WELCOME;
     }
 
-    private function getTemplateNotificataion($name)
+    private function getTemplateNotification($name)
     {
         return $this->em->getRepository(Notification::class)->findOneByName($name);
     }
 
-    public function createNotifToUser($user, $name, $title, $description, $options = [])
+    public function createNotifToUser($user, $name="", $title="", $description="", $options = [],$type,$source=NotificationUser::NOTIFICATION_SOURCE_DEFAULT)
     {
         //find user 
         //check if exist
+
         if (!($user instanceof User))
         {
             $user = $this->em->getRepository(User::class)->find($user);
         }
+
         if ($options && isset($options["template"]) && $options["template"])
         {
             switch ($options["template"])
@@ -76,8 +104,11 @@ class NotificationGenerator
                 case self::NOTIFICATION_WELCOME:
                     $notif = $this->getWelcomeNotification();
                     break;
+                case self::NOTIFICATION_SEND_REQUEST:
+                    $notif = $this->getRequestNotification();
+                    break;
                 default:
-                    $notif = $this->getTemplateNotificataion($options["template"]);
+                    $notif = $this->getTemplateNotification($options["template"]);
                     break;
             }
         } else
@@ -95,16 +126,19 @@ class NotificationGenerator
             $this->em->flush();
         }
         //create relation
-        $notifUser = new NotificationUser;
-        $notifUser->setNotification($notif);
-        $notifUser->setUser($user);
 
+        $notifUser = new NotificationUser;
+        $notifUser->setType($type);
+        $notifUser->setSource($source);
+        $notifUser->setNotification($notif);
         $this->em->persist($notifUser);
+        $user->addNotification($notifUser);
+        $this->em->persist($user);
         $this->em->flush();
         $devices = $this->em->getRepository(Device::class)->findByUser($user);
         $langs[] = [];
         $result = [];
-        if ($devices)
+        if ($devices&&($notifUser->getSource()==NotificationUser::NOTIFICATION_SOURCE_PUSH))
         {
             foreach ($devices as $device)
             {
@@ -122,8 +156,9 @@ class NotificationGenerator
                     $result[] = $this->sendPush($notif->getTitle(), $notif->getDescription(), $tokens, $lang, $notif->getParams());
                 }
             }
+            return $result;
         }
-        return $result;
+        return $notifUser;
     }
 
     /**
@@ -140,6 +175,30 @@ class NotificationGenerator
         $notification = $fcmClient->createDeviceNotification($this->translator->trans($title, $parameters, null, $lang), $this->translator->trans($descrition, $parameters, null, $lang), $token);
         $notification->addData("vibrate", [1000, 500, 2000]);
         return $fcmClient->sendNotification($notification);
+    }
+
+    public function sendMailUser($user, $action, $password)
+    {
+        $header = "";
+        $template = "";
+        $arrayData = null;
+        switch ($action) {
+            case self::MAIL_USER_REGISTER:
+                $header = 'Te has registrado ';
+                $template = 'emails/register.html.twig';
+                $arrayData = array('name' => $user->getName(),
+                    'password' => $password);
+                break;
+        }
+        try {
+            $registerMailNotification = new SendMailCommand(
+                $user->getEmail(), $user->getName(), $header, '', $this->templating->render(
+                $template, $arrayData
+            ), []
+            );
+        //    $this->commandBus->handle($registerMailNotification);
+        } catch (Error $e) {
+        }
     }
 
 }

@@ -59,6 +59,10 @@ version: Versión
 bills: Facturas
 members: Miembros
 owner: Propietario
+notification: Notificación
+readed: Leido
+deleted: Borrado
+acepted: Aceptado
 
 #mime types help
 image.formats: 'Formatos soportados: jpg jpeg png'
@@ -73,6 +77,8 @@ menu.users: Usuarios
 menu.device: Dispositivo
 menu.devices: Dispositivos
 menu.home: Hogar
+menu.notification: Notificacion
+menu.notificationUser: Notif.Usuario
 
 
 # ROLES

@@ -18,27 +18,33 @@ class FinanceStatus
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"finance-read"})
+     * @Groups({"finance-read","user-read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"finance-read"})
+     * @Groups({"finance-read","finance-write","user-read"})
      */
     private $amount;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Income", mappedBy="financeStatus")\
-     * @Groups({"finance-read"})
+     * @Groups({"finance-read","finance-write","user-read"})
      */
     private $income;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Expenses", mappedBy="financeStatus")
-     * @Groups({"finance-read"})
+     * @Groups({"finance-read","finance-write","user-read"})
      */
     private $expenses;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="financeStatus", cascade={"persist"})
+     * @Groups({"finance-read","finance-write"})
+     */
+    private $user;
 
     public function __construct()
     {
@@ -122,6 +128,24 @@ class FinanceStatus
             if ($expense->getFinanceStatus() === $this) {
                 $expense->setFinanceStatus(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newFinanceStatus = $user === null ? null : $this;
+        if ($newFinanceStatus !== $user->getFinanceStatus()) {
+            $user->setFinanceStatus($newFinanceStatus);
         }
 
         return $this;

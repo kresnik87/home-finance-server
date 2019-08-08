@@ -1,0 +1,22 @@
+easy_admin:
+    entities:    
+        Notification:
+            class: App\Entity\Notification
+            label: menu.notification
+            list:
+                title: menu.notification
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'title', label: 'title'}
+                    - { property: 'description', label: 'description'}
+                    - { property: 'createdDate', label: 'createDate'}
+                    
+            show:
+                title: menu.notification
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'title', label: 'title'}
+                    - { property: 'description', label: 'description' }
+                    - { property: 'createdDate', label: 'createdDate'}

@@ -15,6 +15,9 @@ class NotificationUser
 
     const NOTIFICATION_TYPE_ANSWER  = 'answer';
     const NOTIFICATION_TYPE_READ      = 'read';
+    const NOTIFICATION_SOURCE_DEFAULT='default';
+    const NOTIFICATION_SOURCE_PUSH='push';
+    const NOTIFICATION_SOURCE_EMAIL='email';
 
     /**
      * @ORM\Id()
@@ -38,7 +41,6 @@ class NotificationUser
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"user-read", "notification"})
      * @Groups({"user-read", "notification","home-read"})
      */
     private $readed = false;
@@ -71,6 +73,12 @@ class NotificationUser
     private $type= self::NOTIFICATION_TYPE_READ;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user-read", "user-write","home-read"})
+     */
+    private $source= self::NOTIFICATION_SOURCE_DEFAULT;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Home", inversedBy="requestNotif")
      * @Groups({"home-read"})
      */
@@ -86,7 +94,10 @@ class NotificationUser
     {
         return $this->id;
     }
-
+    public function __toString()
+    {
+        return $this->user . " " . " (". $this->getId() . ")";
+    }
     public function getNotification(): ?Notification
     {
         return $this->notification;
@@ -172,6 +183,17 @@ class NotificationUser
     public function setType(string $type): self
     {
         $this->type= $type;
+
+        return $this;
+    }
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(string $source): self
+    {
+        $this->source= $source;
 
         return $this;
     }
