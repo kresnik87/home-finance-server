@@ -60,6 +60,24 @@ services:
               entity: App\Entity\Home
               entity_manager: custom
 
+    income_listener:
+        class: \App\EventListener\IncomeListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - name: doctrine.orm.entity_listener
+              event: prePersist
+              entity: App\Entity\Income
+              entity_manager: custom
+
+    notification_user_listener:
+        class: \App\EventListener\NotificationUserListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - name: doctrine.orm.entity_listener
+              event: postUpdate
+              entity: App\Entity\NotificationUser
+              entity_manager: custom
+
     sendmail_command_handler:
         class: App\Handlers\CommandHandlers\SendMailHandler
         tags:

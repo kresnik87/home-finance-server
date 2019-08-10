@@ -63,6 +63,12 @@ notification: Notificación
 readed: Leido
 deleted: Borrado
 acepted: Aceptado
+income: Ingreso
+expense: Gastos
+financeStatus: Estado Financiero
+concept: Concepto
+frequency: Frecuencia
+date: Fecha
 
 #mime types help
 image.formats: 'Formatos soportados: jpg jpeg png'
@@ -79,6 +85,8 @@ menu.devices: Dispositivos
 menu.home: Hogar
 menu.notification: Notificacion
 menu.notificationUser: Notif.Usuario
+menu.financeStatus: Estado Financiero
+menu.income: Ingresos
 
 
 # ROLES
@@ -86,5 +94,9 @@ ROLE_USER: Usuario
 ROLE_SUPER_ADMIN: Super Administrador
 ROLE_ADMIN: Administrador
 
-
+daily: Diario
+weekly: Semanal
+biweekly: Quincenal
+monthly: Mensual
+yearly: Anual
 password_resset: ¡Contraseña restablecida!

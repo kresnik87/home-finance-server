@@ -6,4 +6,6 @@ easy_admin:
             - { entity: Home, icon: 'home' }
             - { entity: NotificationUser, icon: 'envelope' }
             - { entity: Notification, icon: 'envelope' }
+            - { entity: FinanceStatus, icon: 'money' }
+            - { entity: Income, icon: 'money' }
             - { label: 'API', route: 'api', icon: 'tasks'}

@@ -1,0 +1,20 @@
+easy_admin:
+    entities:    
+        FinanceStatus:
+            class: App\Entity\FinanceStatus
+            label: menu.financeStatus
+            list:
+                title: menu.financeStatus
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'amountStatus', label: 'amount'}
+                    - { property: 'user', label: 'user'}
+                    
+            show:
+                title: menu.financeStatus
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'amountStatus', label: 'amount'}
+                    - { property: 'income', label: 'income' }
+                    - { property: 'expenses', label: 'expenses'}
+                    - { property: 'user', label: 'user'}

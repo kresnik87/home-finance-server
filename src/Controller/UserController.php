@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FinanceStatus;
 use App\Entity\User;
 use App\Entity\Device;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,8 +43,7 @@ class UserController extends Controller
         $params = json_decode($request->getContent(), true);
 
         $user = $this->getUser();
-        if ($params && count($params))
-        {
+        if ($params && count($params)) {
             $user = $this->objUtils->initialize($user, $params);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -56,23 +56,25 @@ class UserController extends Controller
     {
 
         $params = json_decode($request->getContent(), true);
-        if (!$params || !count($params) || !isset($params["username"]) || !isset($params["email"]) || !isset($params["password"]))
-        {
+        if (!$params || !count($params) || !isset($params["username"]) || !isset($params["email"]) || !isset($params["password"])) {
             throw new InvalidArgumentException("Needs params to register");
         }
         //check email and username
         $email = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($params["email"]);
-        if ($email)
-        {
+        if ($email) {
             throw new InvalidArgumentException("Email in use");
         }
         //check passwords match
-        if ($params["password"] !== $params["password_confirm"])
-        {
+        if ($params["password"] !== $params["password_confirm"]) {
             throw new InvalidArgumentException("Passwords not match");
         }
         $em = $this->getDoctrine()->getManager();
         $user = $this->objUtils->initialize(new User(), $params, ["password"]);
+        $financeStatus = new FinanceStatus();
+        $financeStatus->setAmount(0);
+        $financeStatus->setUser($user);
+        $em->persist($financeStatus);
+        $user->setFinanceStatus($financeStatus);
         $user->setPlainPassword($params["password"]);
         $em->persist($user);
         $em->flush();
@@ -84,8 +86,7 @@ class UserController extends Controller
         $token = $this->get("security.token_storage")->getToken();
         //unregister device
         $device = $this->getDoctrine()->getRepository(Device::class)->findOneByToken($token);
-        if ($device)
-        {
+        if ($device) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($device);
             $em->flush();

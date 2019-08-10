@@ -15,6 +15,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Expenses extends Category
 {
 
+
+    const EXPENSES_TYPE_DAILY = "daily";
+    const EXPENSES_TYPE_WEEKLY = "weekly";
+    const EXPENSES_TYPE_BIWEEKLY = "biweekly";
+    const EXPENSES_TYPE_MONTHLY = "monthly";
+    const EXPENSES_TYPE_YEARLY = "yearly";
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"expense-read"})

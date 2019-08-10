@@ -18,7 +18,7 @@ class FinanceStatus
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"finance-read","user-read"})
+     * @Groups({"finance-read","user-read","finance-write"})
      */
     private $id;
 
@@ -41,7 +41,7 @@ class FinanceStatus
     private $expenses;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="financeStatus", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User")
      * @Groups({"finance-read","finance-write"})
      */
     private $user;
@@ -51,8 +51,6 @@ class FinanceStatus
         $this->income = new ArrayCollection();
         $this->expenses = new ArrayCollection();
     }
-
-
 
     public function getId(): ?int
     {
@@ -69,6 +67,30 @@ class FinanceStatus
         $this->amount = $amount;
 
         return $this;
+    }
+
+
+    /**
+     * @Groups({"finance-read","user-read"})
+     */
+    public function getAmountStatus(): ?float
+    {
+        $amountIncome = 0;
+        $amountExpense = 0;
+        if (count($this->getIncome()) > 0) {
+            foreach ($this->getIncome() as $item) {
+                $amountIncome += $item->getAmount();
+            }
+
+        }
+        if (count($this->getExpenses()) > 0) {
+            foreach ($this->getExpenses() as $item) {
+                $amountExpense += $item->getAmount();
+            }
+
+        }
+        $this->setAmount($amountIncome - $amountExpense);
+        return $this->amount;
     }
 
     /**

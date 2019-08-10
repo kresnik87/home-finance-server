@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationUserRepository")
+ * @ORM\EntityListeners({"App\EventListener\NotificationUserListener"})
  */
 class NotificationUser
 {

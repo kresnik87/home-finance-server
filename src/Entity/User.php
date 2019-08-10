@@ -37,7 +37,6 @@ class User extends BaseUser
     
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     protected $dni;
 
@@ -79,25 +78,21 @@ class User extends BaseUser
     
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     private $country;
     
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     private $state;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     private $city;
     
@@ -112,19 +107,16 @@ class User extends BaseUser
      */
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     private $gender;
 
     /**
      * @ORM\Column(type="date", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     private $birthDate;
     
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
      */
     private $civilStatus;
     
@@ -156,7 +148,7 @@ class User extends BaseUser
     private $home;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FinanceStatus", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\FinanceStatus", inversedBy="user", cascade={"persist", "remove"},orphanRemoval=true)
      * @Groups({"user-read"})
      */
     private $financeStatus;
@@ -494,6 +486,18 @@ class User extends BaseUser
         );
     }
 
+    /**
+     * @Groups({"user-read"})
+     */
+    public function getNotificationsTypeRequest(): Collection
+    {
+        return $this->getNotifications()->filter(
+            function($entry)
+            {
+                return $entry->getType()==NotificationUser::NOTIFICATION_TYPE_ANSWER;
+            }
+        );
+    }
     /**
      * @Groups({"user-read"})
      */

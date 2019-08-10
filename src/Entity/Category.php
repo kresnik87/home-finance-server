@@ -17,24 +17,27 @@ abstract  class Category
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"category-read"})
+     * @Groups({"category-read","income-write","income-read","user-read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"category-read"})
+     * @Groups({"category-read","income-write","income-read","user-read"})
      */
     private $concept;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"category-read"})
+     * @Groups({"category-read","income-write","income-read","user-read"})
      */
     private $amount;
 
 
-
+    public function __toString()
+    {
+        return $this->getConcept() . " " . " (". $this->getId() . ")";
+    }
     public function getId(): ?int
     {
         return $this->id;

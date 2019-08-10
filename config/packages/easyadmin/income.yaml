@@ -1,0 +1,39 @@
+easy_admin:
+    entities:    
+        Income:
+            class: App\Entity\Income
+            label: menu.income
+            list:
+                title: menu.income
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'concept', label: 'concept'}
+                    - { property: 'amount', label: 'amount'}
+                    - { property: 'frequency', label: 'frequency',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'date', label: 'date'}
+                    
+            show:
+                title: menu.income
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'concept', label: 'concept'}
+                    - { property: 'amount', label: 'amount'}
+                    - { property: 'frequency', label: 'frequency',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'date', label: 'date'}
+
+            form:
+                title: menu.income
+                fields:
+                    - { property: 'concept', label: 'concept'}
+                    - { property: 'amount', type: 'money', type_options: { currency: 'EUR' } }
+                    - property: 'frequency'
+                      label: 'frequency'
+                      type: choice
+                      type_options:
+                          choices:
+                              daily: !php/const App\Entity\Income::INCOME_TYPE_DAILY
+                              weekly: !php/const App\Entity\Income::INCOME_TYPE_WEEKLY
+                              biweekly: !php/const App\Entity\Income::INCOME_TYPE_BIWEEKLY
+                              monthly: !php/const App\Entity\Income::INCOME_TYPE_MONTHLY
+                              yearly: !php/const App\Entity\Income::INCOME_TYPE_YEARLY
+                    - { property: 'date', label: 'date'}

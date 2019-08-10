@@ -19,7 +19,7 @@ class Home
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"home-read"})
+     * @Groups({"home-read","user-read"})
      */
     private $id;
 
@@ -31,25 +31,25 @@ class Home
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Bill", mappedBy="home")
-     * @Groups({"home-read"})
+     * @Groups({"home-read","user-read"})
      */
     private $bills;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"home-read"})
+     * @Groups({"home-read","user-read"})
      */
     private $createDate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"home-read"})
+     * @Groups({"home-read","user-read"})
      */
     private $updatedDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"home-read","home-write"})
+     * @Groups({"home-read","home-write","user-read"})
      */
     private $address;
 
@@ -73,7 +73,7 @@ class Home
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"home-read","home-write"})
+     * @Groups({"home-read","home-write","user-read"})
      */
     private $name;
 
