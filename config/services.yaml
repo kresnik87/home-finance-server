@@ -47,7 +47,7 @@ services:
             - { name: doctrine.orm.entity_listener }
             -
                 name: doctrine.orm.entity_listener
-                event: postPersist
+                event: prePersist
                 entity: App\Entity\User
                 entity_manager: custom
 
@@ -67,6 +67,15 @@ services:
             - name: doctrine.orm.entity_listener
               event: prePersist
               entity: App\Entity\Income
+              entity_manager: custom
+
+    budget_listener:
+        class: \App\EventListener\BudgetListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - name: doctrine.orm.entity_listener
+              event: prePersist
+              entity: App\Entity\Budget
               entity_manager: custom
 
     notification_user_listener:

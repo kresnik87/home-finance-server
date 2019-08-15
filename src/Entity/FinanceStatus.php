@@ -18,13 +18,13 @@ class FinanceStatus
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"finance-read","user-read","finance-write"})
+     * @Groups({"finance-read","user-read","finance-write","user-write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"finance-read","finance-write","user-read"})
+     * @Groups({"finance-read","finance-write","user-read","user-write"})
      */
     private $amount;
 

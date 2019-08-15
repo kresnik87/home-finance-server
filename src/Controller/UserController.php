@@ -70,11 +70,7 @@ class UserController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
         $user = $this->objUtils->initialize(new User(), $params, ["password"]);
-        $financeStatus = new FinanceStatus();
-        $financeStatus->setAmount(0);
-        $financeStatus->setUser($user);
-        $em->persist($financeStatus);
-        $user->setFinanceStatus($financeStatus);
+
         $user->setPlainPassword($params["password"]);
         $em->persist($user);
         $em->flush();

@@ -2,15 +2,14 @@
 
 namespace App\EventListener;
 
-use App\Entity\Home;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
-use App\Entity\NotificationUser;
+use App\Entity\Budget;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class NotificationUserListener
+class BudgetListener
 {
     protected $tokenStorage;
 
@@ -24,9 +23,9 @@ class NotificationUserListener
     }
 
         /**
-     * @ORM\PostUpdate
+     * @ORM\PrePersist
      */
-    public function postUpdateHandler(NotificationUser $notificationUser, LifecycleEventArgs $event)
+    public function prePersistHandler(Budget $budget, LifecycleEventArgs $event)
     {
 
         $em = $event->getEntityManager();
@@ -34,16 +33,12 @@ class NotificationUserListener
             return;
         }
         $user = $this->tokenStorage->getToken()->getUser();
-        if($notificationUser->getType()==NotificationUser::NOTIFICATION_TYPE_ANSWER&&$notificationUser->getAcepted()==true){
-            $home=$notificationUser->getHome();
-            if(!$home){
-                return new JsonResponse(["error"=>"home.invalidHome"]);
-            }
-            $home->addMember($user);
-            $em->persist($home);
-            $em->flush();
+        if ($user instanceof User) {
+           if($user->getHome()&& $user->getHome()->getOwner()->getId()==$user->getId()){
+               $budget->setHome($user->getHome());
+           }
+            return new JsonResponse(["error"=>"home.notOwner"]);
         }
-
     }
 
 }

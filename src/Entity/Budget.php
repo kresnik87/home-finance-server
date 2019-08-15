@@ -11,14 +11,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\BudgetRepository")
+ * @ORM\EntityListeners({"App\EventListener\BudgetListener"})
  */
 class Budget
 {
+    const STATUS_PREPARE  = 'prepare';
+    const STATUS_CONFIRM= 'confirm';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"budget-read"})
+     * @Groups({"budget-read","user-read"})
      */
     private $id;
 
@@ -30,37 +34,42 @@ class Budget
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"budget-read"})
+     * @Groups({"budget-read","budget-write"})
      */
     private $dateUpdated;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"budget-read"})
+     * @Groups({"budget-read","budget-write"})
      */
-    private $status;
+    private $status=self::STATUS_PREPARE;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"budget-read"})
+     * @Groups({"budget-read","budget-write"})
      */
     private $coef;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\BudgetCat", mappedBy="budget")
-     * @Groups({"budget-read"})
+     * @Groups({"budget-read","budget-write"})
      */
     private $category;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Income", cascade={"persist", "remove"})
-     * @Groups({"budget-read"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Home", inversedBy="budgets")
+     * @Groups({"budget-read","budget-write"})
      */
-    private $income;
+    private $home;
+
+
+
 
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->dateCreated = new \dateTime();
+        $this->dateUpdated = new \dateTime();
     }
 
     public function getId(): ?int
@@ -147,15 +156,22 @@ class Budget
         return $this;
     }
 
-    public function getIncome(): ?Income
+    public function getIncome(): float
     {
-        return $this->income;
+        return $this->getHome()->getHomeIncome();
     }
 
-    public function setIncome(?Income $income): self
+    public function getHome(): ?Home
     {
-        $this->income = $income;
+        return $this->home;
+    }
+
+    public function setHome(?Home $home): self
+    {
+        $this->home = $home;
 
         return $this;
     }
+
+
 }

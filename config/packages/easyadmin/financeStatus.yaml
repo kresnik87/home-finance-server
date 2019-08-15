@@ -7,14 +7,14 @@ easy_admin:
                 title: menu.financeStatus
                 fields:
                     - { property: 'id', label: 'id' }
-                    - { property: 'amountStatus', label: 'amount'}
+                    - { property: 'amountStatus', label: 'amount',template: 'easy_admin/money.html.twig'}
                     - { property: 'user', label: 'user'}
                     
             show:
                 title: menu.financeStatus
                 fields:
                     - { property: 'id', label: 'id' }
-                    - { property: 'amountStatus', label: 'amount'}
+                    - { property: 'amountStatus', label: 'amount',template: 'easy_admin/money.html.twig'}
                     - { property: 'income', label: 'income' }
                     - { property: 'expenses', label: 'expenses'}
                     - { property: 'user', label: 'user'}

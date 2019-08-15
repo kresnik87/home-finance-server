@@ -9,7 +9,7 @@ easy_admin:
                     - { property: 'id', label: 'id' }
                     - { property: 'name', label: 'name' }
                     - { property: 'address', label: 'address'}
-                    - { property: 'updatedDate', label: 'updatedDate'}
+                    - { property: 'homeIncome', label: 'homeIncome',  template: 'easy_admin/money.html.twig'}
                     - { property: 'createDate', label: 'createdDate'}
                     - { property: 'owner', label: 'owner'}
                     
@@ -25,6 +25,7 @@ easy_admin:
                     - { property: 'createDate', label: 'createdDate'}
                     - { property: 'owner', label: 'owner'}
                     - { property: 'requestNotif', label: 'notification'}
+                    - { property: 'homeIncome', label: 'homeIncome',  template: 'easy_admin/money.html.twig'}
 #
                     
                     

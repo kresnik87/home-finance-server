@@ -90,6 +90,13 @@ class Home
      */
     private $requestNotif;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Budget", mappedBy="home")
+     * @Groups({"home-read","user-read"})
+     */
+    private $budgets;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -97,6 +104,7 @@ class Home
         $this->createDate = new \dateTime();
         $this->updatedDate = new \dateTime();
         $this->requestNotif = new ArrayCollection();
+        $this->budgets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -106,8 +114,9 @@ class Home
 
     public function __toString()
     {
-        return $this->getName() . " " . " (". $this->getId() . ")";
+        return $this->getName() . " " . " (" . $this->getId() . ")";
     }
+
     /**
      * @return Collection|User[]
      */
@@ -177,7 +186,7 @@ class Home
 
     public function setCreatedDate(?\dateTime $createdDate = null): self
     {
-        $this->createDate = $createdDate? $createdDate: new \dateTime();
+        $this->createDate = $createdDate ? $createdDate : new \dateTime();
         return $this;
     }
 
@@ -188,7 +197,7 @@ class Home
 
     public function setUpdatedDate(?\dateTime $updatedDate = null): self
     {
-        $this->updatedDate = $updatedDate? $updatedDate: new \dateTime();
+        $this->updatedDate = $updatedDate ? $updatedDate : new \dateTime();
         return $this;
     }
 
@@ -294,4 +303,57 @@ class Home
 
         return $this;
     }
+
+
+
+    /**
+     * @Groups({"home-read","user-read"})
+     */
+    public function getHomeIncome(): ?float
+    {
+        $amountIncome = 0;
+        if (count($this->getMembers()) > 0) {
+            foreach ($this->getMembers() as $member) {
+                if ($member->getFinanceStatus()) {
+                    foreach ($member->getFinanceStatus()->getIncome() as $income) {
+                        $amountIncome += $income->getAmount();
+                    }
+                }
+            }
+        }
+        return $amountIncome;
+
+    }
+
+    /**
+     * @return Collection|Budget[]
+     */
+    public function getBudgets(): Collection
+    {
+        return $this->budgets;
+    }
+
+    public function addBudget(Budget $budget): self
+    {
+        if (!$this->budgets->contains($budget)) {
+            $this->budgets[] = $budget;
+            $budget->setHome($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBudget(Budget $budget): self
+    {
+        if ($this->budgets->contains($budget)) {
+            $this->budgets->removeElement($budget);
+            // set the owning side to null (unless already changed)
+            if ($budget->getHome() === $this) {
+                $budget->setHome(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -69,6 +69,7 @@ financeStatus: Estado Financiero
 concept: Concepto
 frequency: Frecuencia
 date: Fecha
+homeIncome: Ingresos Hogar
 
 #mime types help
 image.formats: 'Formatos soportados: jpg jpeg png'
