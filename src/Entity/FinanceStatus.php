@@ -18,7 +18,7 @@ class FinanceStatus
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"finance-read","user-read","finance-write","user-write"})
+     * @Groups({"finance-read","user-read","finance-write","user-write","operation-write"})
      */
     private $id;
 
@@ -28,17 +28,7 @@ class FinanceStatus
      */
     private $amount;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Income", mappedBy="financeStatus")\
-     * @Groups({"finance-read","finance-write","user-read"})
-     */
-    private $income;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Expenses", mappedBy="financeStatus")
-     * @Groups({"finance-read","finance-write","user-read"})
-     */
-    private $expenses;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User")
@@ -46,10 +36,15 @@ class FinanceStatus
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Operation", mappedBy="finance")
+     * @Groups({"finance-read","user-read"})
+     */
+    private $operations;
+
     public function __construct()
     {
-        $this->income = new ArrayCollection();
-        $this->expenses = new ArrayCollection();
+        $this->operations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,83 +72,22 @@ class FinanceStatus
     {
         $amountIncome = 0;
         $amountExpense = 0;
-        if (count($this->getIncome()) > 0) {
-            foreach ($this->getIncome() as $item) {
-                $amountIncome += $item->getAmount();
+        if(count($this->getOperations())>0){
+            foreach ($this->getOperations() as $oper){
+                if($oper->isIncome()){
+                    $amountIncome+=$oper->getAmount();
+                }else{
+                    $amountExpense+=$oper->getAmount();
+                }
             }
-
+            $this->setAmount($amountIncome-$amountExpense);
+            return $this->amount;
         }
-        if (count($this->getExpenses()) > 0) {
-            foreach ($this->getExpenses() as $item) {
-                $amountExpense += $item->getAmount();
-            }
+        return null;
 
-        }
-        $this->setAmount($amountIncome - $amountExpense);
-        return $this->amount;
     }
 
-    /**
-     * @return Collection|Income[]
-     */
-    public function getIncome(): Collection
-    {
-        return $this->income;
-    }
 
-    public function addIncome(Income $income): self
-    {
-        if (!$this->income->contains($income)) {
-            $this->income[] = $income;
-            $income->setFinanceStatus($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIncome(Income $income): self
-    {
-        if ($this->income->contains($income)) {
-            $this->income->removeElement($income);
-            // set the owning side to null (unless already changed)
-            if ($income->getFinanceStatus() === $this) {
-                $income->setFinanceStatus(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Expenses[]
-     */
-    public function getExpenses(): Collection
-    {
-        return $this->expenses;
-    }
-
-    public function addExpense(Expenses $expense): self
-    {
-        if (!$this->expenses->contains($expense)) {
-            $this->expenses[] = $expense;
-            $expense->setFinanceStatus($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExpense(Expenses $expense): self
-    {
-        if ($this->expenses->contains($expense)) {
-            $this->expenses->removeElement($expense);
-            // set the owning side to null (unless already changed)
-            if ($expense->getFinanceStatus() === $this) {
-                $expense->setFinanceStatus(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -168,6 +102,37 @@ class FinanceStatus
         $newFinanceStatus = $user === null ? null : $this;
         if ($newFinanceStatus !== $user->getFinanceStatus()) {
             $user->setFinanceStatus($newFinanceStatus);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Operation[]
+     */
+    public function getOperations(): Collection
+    {
+        return $this->operations;
+    }
+
+    public function addOperation(Operation $operation): self
+    {
+        if (!$this->operations->contains($operation)) {
+            $this->operations[] = $operation;
+            $operation->setFinance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOperation(Operation $operation): self
+    {
+        if ($this->operations->contains($operation)) {
+            $this->operations->removeElement($operation);
+            // set the owning side to null (unless already changed)
+            if ($operation->getFinance() === $this) {
+                $operation->setFinance(null);
+            }
         }
 
         return $this;

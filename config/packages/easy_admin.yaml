@@ -20,14 +20,16 @@ easy_admin:
         datetime: 'd/m/Y H:i:s'
     design:
 #        brand_color: '%env(APP_COLOR)%'
-        brand_color: "#2a555d"
-#        assets:
-#            js:
-#                - '/ckeditor5/ckeditor.js.map'
-#                - '/ckeditor5/ckeditor.js'
-#                - '/ckeditor5/custom.js'
+        brand_color: "#023C40"
         assets:
-            favicon: '/assets/img/logo.png'
+             js:
+                 - 'bundles/easyadmin/bootstrap-all.js'
+
+             css:
+                 - 'bundles/easyadmin/bootstrap-all.css'
+                 - '/assets/css/general.css'
+
+             favicon: '/assets/img/logo.png'
 
 imports:
     - { resource: easyadmin/*.yaml }

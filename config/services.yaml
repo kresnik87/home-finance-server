@@ -60,13 +60,13 @@ services:
               entity: App\Entity\Home
               entity_manager: custom
 
-    income_listener:
-        class: \App\EventListener\IncomeListener
+    operation_listener:
+        class: \App\EventListener\OperationListener
         tags:
             - { name: doctrine.orm.entity_listener }
             - name: doctrine.orm.entity_listener
               event: prePersist
-              entity: App\Entity\Income
+              entity: App\Entity\Operation
               entity_manager: custom
 
     budget_listener:
@@ -76,6 +76,15 @@ services:
             - name: doctrine.orm.entity_listener
               event: prePersist
               entity: App\Entity\Budget
+              entity_manager: custom
+
+    budgetCat_listener:
+        class: \App\EventListener\BudgetCatListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - name: doctrine.orm.entity_listener
+              event: prePersist
+              entity: App\Entity\BudgetCat
               entity_manager: custom
 
     notification_user_listener:

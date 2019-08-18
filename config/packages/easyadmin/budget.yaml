@@ -1,0 +1,27 @@
+easy_admin:
+    entities:    
+        Budget:
+            class: App\Entity\Budget
+            label: menu.budget
+            list:
+                title: menu.budget
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'dateCreated', label: 'dateCreated'}
+                    - { property: 'status', label: 'status',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'coef', label: 'coef'}
+                    - { property: 'coefStatus', label: 'coefStatus',template: 'easy_admin/porcentage.html.twig'}
+
+            show:
+                title: menu.budget
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'dateCreated', label: 'dateCreated'}
+                    - { property: 'dateUpdated', label: 'dateUpdated'}
+                    - { property: 'status', label: 'status',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'coef', label: 'coef'}
+                    - { property: 'category', label: 'category'}
+                    - { property: 'home', label: 'home'}
+                    - { property: 'coefStatus', label: 'coefStatus',template: 'easy_admin/porcentage.html.twig'}
+
+

@@ -5,7 +5,10 @@ easy_admin:
             - { entity: Device, icon: 'mobile' }
             - { entity: Home, icon: 'home' }
             - { entity: NotificationUser, icon: 'envelope' }
-            - { entity: Notification, icon: 'envelope' }
-            - { entity: FinanceStatus, icon: 'money' }
-            - { entity: Income, icon: 'money' }
+            - { entity: Notification, icon: 'bell' }
+            - { entity: FinanceStatus, icon: 'book' }
+            - { entity: BudgetCat, icon: 'atlas' }
+            - { entity: Budget, icon: 'clipboard-list' }
+            - { entity: Category, icon: 'folder-plus'}
+            - { entity: Operation, icon: 'random'}
             - { label: 'API', route: 'api', icon: 'tasks'}

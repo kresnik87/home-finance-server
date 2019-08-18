@@ -15,6 +15,5 @@ easy_admin:
                 fields:
                     - { property: 'id', label: 'id' }
                     - { property: 'amountStatus', label: 'amount',template: 'easy_admin/money.html.twig'}
-                    - { property: 'income', label: 'income' }
-                    - { property: 'expenses', label: 'expenses'}
+                    - { property: 'operations', label: 'operations' }
                     - { property: 'user', label: 'user'}

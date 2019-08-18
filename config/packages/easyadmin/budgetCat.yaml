@@ -1,0 +1,27 @@
+easy_admin:
+    entities:    
+        BudgetCat:
+            class: App\Entity\BudgetCat
+            label: menu.budgetCat
+            list:
+                title: menu.budgetCat
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name'}
+                    - { property: 'amount', label: 'amount'}
+                    - { property: 'frecuency', label: 'frecuency',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'budget', label: 'budget'}
+                    
+            show:
+                title: menu.budgetCat
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name'}
+                    - { property: 'amount', label: 'amount'}
+                    - { property: 'frecuency', label: 'frecuency',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'budget', label: 'budget'}
+                    - { property: 'startDate', label: 'startDate'}
+                    - { property: 'endDate', label: 'endDate'}
+                    - { property: 'category', label: 'category'}
+
+

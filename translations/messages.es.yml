@@ -70,12 +70,18 @@ concept: Concepto
 frequency: Frecuencia
 date: Fecha
 homeIncome: Ingresos Hogar
-
+budget: Presupuesto
+coef: Coeficiente
+coefStatus: Estado del Coef.
+category: Categoria
+dateCreated: Fecha Creación
+icon: Icono
+color: Color
 #mime types help
 image.formats: 'Formatos soportados: jpg jpeg png'
 video.formats: 'Formatos soportados: mp4 mov avi'
 audio.formats: 'Formatos soportados: mp4 audio mp3'
-
+frecuency: Recurrencia
 wrong.type: Formato incorrecto
 
 #Menu Labels
@@ -88,6 +94,10 @@ menu.notification: Notificacion
 menu.notificationUser: Notif.Usuario
 menu.financeStatus: Estado Financiero
 menu.income: Ingresos
+menu.budgetCat: Categ. Presupuesto
+menu.budget: Presupuestos
+menu.category: Categorias
+menu.operations: Operaciones
 
 
 # ROLES
@@ -101,3 +111,11 @@ biweekly: Quincenal
 monthly: Mensual
 yearly: Anual
 password_resset: ¡Contraseña restablecida!
+
+#Budget Status
+prepare: Preparando
+confirm: Confirmado
+#BudgetCat Type
+fixed: Fijo
+variable: Variable
+

@@ -2,16 +2,15 @@
 
 namespace App\EventListener;
 
-use App\Entity\Home;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
-use App\Entity\NotificationUser;
+use App\Entity\BudgetCat;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 
-class NotificationUserListener
+class BudgetCatListener
 {
     protected $tokenStorage;
 
@@ -25,9 +24,9 @@ class NotificationUserListener
     }
 
         /**
-     * @ORM\PostUpdate
+     * @ORM\PrePersist
      */
-    public function postUpdateHandler(NotificationUser $notificationUser, LifecycleEventArgs $event)
+    public function prePersistHandler(BudgetCat $budgetCat, LifecycleEventArgs $event)
     {
 
         $em = $event->getEntityManager();
@@ -35,16 +34,14 @@ class NotificationUserListener
             return;
         }
         $user = $this->tokenStorage->getToken()->getUser();
-        if($notificationUser->getType()==NotificationUser::NOTIFICATION_TYPE_ANSWER&&$notificationUser->getAcepted()==true){
-            $home=$notificationUser->getHome();
-            if(!$home){
-                throw new InvalidArgumentException("home.invalidHome");
-            }
-            $home->addMember($user);
-            $em->persist($home);
-            $em->flush();
+        if ($user instanceof User) {
+           if($user->getHome()&&$user->getHome()->isUserOwner($user)){
+               $start=$budgetCat->getStartDate()->format("Y-m-d");
+               $endDate= (new \DateTime($start))->modify($budgetCat->getFrecuencyToTime());
+               $budgetCat->setEndDate($endDate);
+           }
+            throw new InvalidArgumentException("home.notOwner");
         }
-
     }
 
 }

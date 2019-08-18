@@ -1,0 +1,28 @@
+easy_admin:
+    entities:    
+        Operation:
+            class: App\Entity\Operation
+            label: menu.operations
+            list:
+                title: menu.operations
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'date', label: 'date' }
+                    - { property: 'frecuency', label: 'frecuency',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'amount', label: 'amount', template: 'easy_admin/money.html.twig'}
+                    - { property: 'type', label: 'type', template: 'easy_admin/translate.html.twig'}
+                    
+            show:
+                title: menu.operations
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'date', label: 'date' }
+                    - { property: 'frecuency', label: 'frecuency',template: 'easy_admin/translate.html.twig'}
+                    - { property: 'amount', label: 'amount', template: 'easy_admin/money.html.twig'}
+                    - { property: 'type', label: 'type', template: 'easy_admin/translate.html.twig'}
+                    - { property: 'finance', label: 'financeStatus'}
+                    - { property: 'category', label: 'category'}
+#
+                    
+                    
+

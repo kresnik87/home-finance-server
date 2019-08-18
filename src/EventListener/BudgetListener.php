@@ -8,6 +8,7 @@ use App\Entity\Budget;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 
 class BudgetListener
 {
@@ -37,7 +38,7 @@ class BudgetListener
            if($user->getHome()&& $user->getHome()->getOwner()->getId()==$user->getId()){
                $budget->setHome($user->getHome());
            }
-            return new JsonResponse(["error"=>"home.notOwner"]);
+            throw new InvalidArgumentException("home.notOwner");
         }
     }
 

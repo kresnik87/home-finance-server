@@ -22,13 +22,13 @@ class Budget
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"budget-read","user-read"})
+     * @Groups({"budget-read","user-read","budgetCat-write","home-read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"budget-read"})
+     * @Groups({"budget-read","home-read"})
      */
     private $dateCreated;
 
@@ -40,19 +40,19 @@ class Budget
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"budget-read","budget-write"})
+     * @Groups({"budget-read","budget-write","home-read"})
      */
     private $status=self::STATUS_PREPARE;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"budget-read","budget-write"})
+     * @Groups({"budget-read","budget-write","home-read"})
      */
     private $coef;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\BudgetCat", mappedBy="budget")
-     * @Groups({"budget-read","budget-write"})
+     * @Groups({"budget-read","budget-write","home-read"})
      */
     private $category;
 
@@ -72,6 +72,10 @@ class Budget
         $this->dateUpdated = new \dateTime();
     }
 
+    public function __toString()
+    {
+        return "Budget -" .$this->getHome(). " (" . $this->getId() . ")";
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -173,5 +177,21 @@ class Budget
         return $this;
     }
 
+    /**
+     * @Groups({"budget-read","user-read"})
+     */
+    public function getCoefStatus():float{
+        $totalAmount=0;
+        $totalIncome=$this->getHome()->getHomeIncome();
+        if(count($this->getCategory())>0){
+            foreach ($this->getCategory() as $cat){
+                $totalAmount+=$cat->getAmount();
+            }
+            $coef=(100*$totalAmount)/$totalIncome;
+            $coef=round($coef,2);
+            $this->setCoef($coef);
+            return $this->coef;
+        }
+    }
 
 }

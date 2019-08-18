@@ -36,7 +36,7 @@ class NotificationUser
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notifications")
-     * @Groups({"notification","home-read"})
+     * @Groups({"notification"})
      */
     private $user;
 
@@ -81,7 +81,6 @@ class NotificationUser
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Home", inversedBy="requestNotif")
-     * @Groups({"home-read"})
      */
     private $home;
 

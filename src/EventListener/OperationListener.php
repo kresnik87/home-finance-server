@@ -4,11 +4,11 @@ namespace App\EventListener;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
-use App\Entity\Income;
+use App\Entity\Operation;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class IncomeListener
+class OperationListener
 {
     protected $tokenStorage;
 
@@ -24,7 +24,7 @@ class IncomeListener
         /**
      * @ORM\PrePersist
      */
-    public function prePersistHandler(Income $income, LifecycleEventArgs $event)
+    public function prePersistHandler(Operation $operation, LifecycleEventArgs $event)
     {
 
         $em = $event->getEntityManager();
@@ -32,9 +32,6 @@ class IncomeListener
             return;
         }
         $user = $this->tokenStorage->getToken()->getUser();
-        if ($user instanceof User && $user->getFinanceStatus()!=null) {
-            $income->setFinanceStatus($user->getFinanceStatus());
-        }
     }
 
 }

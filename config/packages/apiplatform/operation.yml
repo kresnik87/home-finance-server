@@ -1,11 +1,11 @@
 resources:
-    App\Entity\Income:
+    App\Entity\Operation:
         attributes:
             pagination_enabled: false
             normalization_context:
-                groups: ['income-read']
+                groups: ['operation-read']
             denormalization_context:
-                groups: ['income-write']
+                groups: ['operation-write']
             swagger_context: 
                 groups: []
         collectionOperations:

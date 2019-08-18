@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -19,7 +20,7 @@ class Home
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"home-read","user-read"})
+     * @Groups({"home-read","user-read","budget-read"})
      */
     private $id;
 
@@ -315,13 +316,37 @@ class Home
         if (count($this->getMembers()) > 0) {
             foreach ($this->getMembers() as $member) {
                 if ($member->getFinanceStatus()) {
-                    foreach ($member->getFinanceStatus()->getIncome() as $income) {
-                        $amountIncome += $income->getAmount();
+                    foreach ($member->getFinanceStatus()->getOperations() as $oper) {
+                        if($oper->isIncome()){
+                            $amountIncome += $oper->getAmount();
+                        }
+
                     }
                 }
             }
         }
         return $amountIncome;
+
+    }
+    /**
+     * @Groups({"home-read","user-read"})
+     */
+    public function getHomeExpense(): ?float
+    {
+        $amountExpense = 0;
+        if (count($this->getMembers()) > 0) {
+            foreach ($this->getMembers() as $member) {
+                if ($member->getFinanceStatus()) {
+                    foreach ($member->getFinanceStatus()->getOperations() as $oper) {
+                        if(!$oper->isIncome()){
+                            $amountExpense+= $oper->getAmount();
+                        }
+
+                    }
+                }
+            }
+        }
+        return $amountExpense;
 
     }
 
@@ -354,6 +379,10 @@ class Home
         }
 
         return $this;
+    }
+
+    public function isUserOwner(User $user){
+        return $this->getOwner()->getId()===$user->getId();
     }
 
 }

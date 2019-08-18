@@ -1,0 +1,38 @@
+easy_admin:
+    entities:    
+        Category:
+            class: App\Entity\Category
+            label: menu.category
+            list:
+                title: menu.category
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'icon', label: 'icon',template: 'easy_admin/icon.html.twig'}
+                    - { property: 'type', label: 'type', template: 'easy_admin/translate.html.twig'}
+                    - { property: 'color', label: 'color', template: 'easy_admin/colors.html.twig'}
+                    
+            show:
+                title: menu.category
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name' }
+                    - { property: 'icon', label: 'icon',template: 'easy_admin/icon.html.twig'}
+                    - { property: 'type', label: 'type', template: 'easy_admin/translate.html.twig'}
+                    - { property: 'color', label: 'color', template: 'easy_admin/colors.html.twig'}
+#
+                    
+                    
+            form:
+                title: menu.category
+                fields:
+                    - { property: 'name', label: 'name' }
+                    - { property: 'icon', label: 'icon'}
+                    - property: 'type'
+                      label: 'type'
+                      type: choice
+                      type_options:
+                          choices:
+                              income: !php/const App\Entity\Operation::OPERATION_TYPE_INCOME
+                              expense: !php/const App\Entity\Operation::OPERATION_TYPE_EXPENSE
+                    - { property: 'color', label: 'color',type: 'color'}

@@ -1,11 +1,11 @@
 resources:
-    App\Entity\Expenses:
+    App\Entity\Category:
         attributes:
             pagination_enabled: false
             normalization_context:
-                groups: ['expenses-read']
+                groups: ['category-read']
             denormalization_context:
-                groups: ['expenses-write']
+                groups: ['category-write']
             swagger_context: 
                 groups: []
         collectionOperations:
