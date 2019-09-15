@@ -31,7 +31,7 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"user-read","device-write", "home-write","home-read"})
+     * @Groups({"user-read","device-write", "home-write","home-read","notification-read"})
      */
     protected $id;
     
@@ -42,7 +42,7 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write","home-read"})
+     * @Groups({"user-read", "user-write","home-read","notification-read"})
      */
     private $name;
 
@@ -54,7 +54,7 @@ class User extends BaseUser
     
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"user-read", "user-write","home-read"})
      * @var string
      */
     private $image;
@@ -487,7 +487,7 @@ class User extends BaseUser
     }
 
     /**
-     * @Groups({"user-read"})
+     * @Groups({"user-read","home-read"})
      */
     public function getNotificationsTypeRequest(): Collection
     {
@@ -498,6 +498,7 @@ class User extends BaseUser
             }
         );
     }
+    
     /**
      * @Groups({"user-read"})
      */

@@ -11,6 +11,7 @@ resources:
         collectionOperations:
             get:
                 method: 'GET'
+                filters: ['budget.filter']
             post:
                 method: 'POST'
 

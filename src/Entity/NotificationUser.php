@@ -24,42 +24,42 @@ class NotificationUser
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user-read", "notification"})
+     * @Groups({"user-read", "notification-read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Notification", inversedBy="users")
-     * @Groups({"user-read", "notification"})
+     * @Groups({"user-read", "notification-read", "notification-write"})
      */
     private $notification;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notifications")
-     * @Groups({"notification"})
+     * @Groups({"notification-read","home-read"})
      */
     private $user;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"user-read", "notification","home-read"})
+     * @Groups({"user-read", "notification-read","home-read","notification-write"})
      */
     private $readed = false;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"user-read", "notification"})
+     * @Groups({"user-read", "notification-read","notification-write"})
      */
     private $deleted = false;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"user-read", "notification","home-read"})
+     * @Groups({"user-read", "notification-read","home-read","notification-write"})
      */
     private $acepted = false;
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user-read", "notification","home-read"})
+     * @Groups({"user-read", "notification-read","home-read","notification-write"})
      */
     private $createdDate;
     /**

@@ -3,9 +3,9 @@ resources:
         attributes:
             pagination_enabled: false
             normalization_context:
-                groups: ['notification']
+                groups: ['notification-read']
             denormalization_context:
-                groups: ['notification']
+                groups: ['notification-write']
         collectionOperations:
             get:
                 method: 'GET'

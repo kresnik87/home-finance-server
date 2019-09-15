@@ -109,3 +109,11 @@ services:
         tags:
              - { name: command_handler, handles: App\Handlers\Command\SendPushCommand }
         public: true
+
+    budget.filter:
+      parent: 'api_platform.doctrine.orm.search_filter'
+      arguments:  [{ home.id: "exact"}]
+      tags:  [ 'api_platform.filter' ]
+      autowire: false
+      autoconfigure: false
+      public: false
