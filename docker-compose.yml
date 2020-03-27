@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  nginx:
+    build:
+      args:
+        VERSION: 1.5
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+      target: dev
+    volumes:
+      - ./assets:/app/public
+    depends_on:
+      - php-fpm
+    ports:
+      - 8000:80
+  php-fpm:
+    build:
+      args:
+        VERSION: 7.3
+      context: .
+      dockerfile: ./docker/php-fpm/Dockerfile
+      target: dev
+    volumes:
+      - .:/app
+    command: sh -c 'composer install --no-interaction --optimize-autoloader && php-fpm'
+
+
