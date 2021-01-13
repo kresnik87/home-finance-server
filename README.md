@@ -1,4 +1,3 @@
-<h1 align="center"><a href="http://www.essedi.es"><img src="http://www.essedi.es/wp-content/uploads/2017/12/cropped-newsletter-logo-essedi.png" alt="Essedi"></a></h1>
 
 # Symfony Base Proyect
 ***
